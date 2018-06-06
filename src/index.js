@@ -101,6 +101,11 @@ export type OptionsData = {
   graphiql?: ?boolean,
 
   /**
+   * CDN domain of the static resources of graphiql.
+   */
+  graphiqlCDN?: ?string,
+
+  /**
    * A resolver function to use when one is not provided by the schema.
    * If not provided, the default field resolver is used (which looks for a
    * value or method on the source value with the field's name).
@@ -159,6 +164,7 @@ function graphqlHTTP(options: Options): Middleware {
     let formatErrorFn;
     let extensionsFn;
     let showGraphiQL;
+    let graphiqlCDN;
     let query;
 
     let documentAST;
@@ -199,6 +205,7 @@ function graphqlHTTP(options: Options): Middleware {
         const rootValue = optionsData.rootValue;
         const fieldResolver = optionsData.fieldResolver;
         const graphiql = optionsData.graphiql;
+        graphiqlCDN = optionsData.graphiqlCDN;
 
         context = optionsData.context || request;
 
@@ -343,6 +350,7 @@ function graphqlHTTP(options: Options): Middleware {
             variables,
             operationName,
             result,
+            graphiqlCDN,
           });
           return sendResponse(response, 'text/html', payload);
         }

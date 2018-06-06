@@ -10,11 +10,15 @@
  */
 
 type GraphiQLData = {
+  graphiqlCDN: ?string,
   query: ?string,
   variables: ?{ [name: string]: mixed },
   operationName: ?string,
   result?: mixed,
 };
+
+// Default CDN domain.
+const DEFAULT_CDN_DOMAIN = 'cdn.jsdelivr.net';
 
 // Current latest version of GraphiQL.
 const GRAPHIQL_VERSION = '0.11.11';
@@ -32,6 +36,7 @@ function safeSerialize(data) {
  * requested query.
  */
 export function renderGraphiQL(data: GraphiQLData): string {
+  const cdn = data.graphiqlCDN || DEFAULT_CDN_DOMAIN;
   const queryString = data.query;
   const variablesString = data.variables
     ? JSON.stringify(data.variables, null, 2)
@@ -66,12 +71,12 @@ add "&raw" to the end of the URL within a browser.
       height: 100vh;
     }
   </style>
-  <link href="//cdn.jsdelivr.net/npm/graphiql@${GRAPHIQL_VERSION}/graphiql.css" rel="stylesheet" />
-  <script src="//cdn.jsdelivr.net/es6-promise/4.0.5/es6-promise.auto.min.js"></script>
-  <script src="//cdn.jsdelivr.net/fetch/0.9.0/fetch.min.js"></script>
-  <script src="//cdn.jsdelivr.net/react/15.4.2/react.min.js"></script>
-  <script src="//cdn.jsdelivr.net/react/15.4.2/react-dom.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/graphiql@${GRAPHIQL_VERSION}/graphiql.min.js"></script>
+  <link href="//${cdn}/npm/graphiql@${GRAPHIQL_VERSION}/graphiql.css" rel="stylesheet" />
+  <script src="//${cdn}/es6-promise/4.0.5/es6-promise.auto.min.js"></script>
+  <script src="//${cdn}/fetch/0.9.0/fetch.min.js"></script>
+  <script src="//${cdn}/react/15.4.2/react.min.js"></script>
+  <script src="//${cdn}/react/15.4.2/react-dom.min.js"></script>
+  <script src="//${cdn}/npm/graphiql@${GRAPHIQL_VERSION}/graphiql.min.js"></script>
 </head>
 <body>
   <div id="graphiql">Loading...</div>
