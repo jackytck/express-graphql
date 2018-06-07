@@ -1,5 +1,5 @@
 {
-  "name": "express-graphql",
+  "name": "express-graphql-offline",
   "version": "0.6.12",
   "description": "Production ready GraphQL HTTP middleware.",
   "license": "BSD-3-Clause",
@@ -42,7 +42,6 @@
     ]
   },
   "scripts": {
-    "prepublish": ". ./resources/prepublish.sh",
     "test": "npm run lint && npm run check && npm run testonly",
     "testonly": "mocha $npm_package_options_mocha",
     "lint": "eslint src",
