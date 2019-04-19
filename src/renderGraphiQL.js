@@ -21,7 +21,7 @@ type GraphiQLData = {
 const DEFAULT_CDN_DOMAIN = 'cdn.jsdelivr.net';
 
 // Current latest version of GraphiQL.
-const GRAPHIQL_VERSION = '0.11.11';
+const GRAPHIQL_VERSION = '0.12.0';
 
 // Ensures string values are safe to be used within a <script> tag.
 function safeSerialize(data) {
